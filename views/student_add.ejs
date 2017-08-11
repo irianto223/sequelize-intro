@@ -6,6 +6,7 @@
   </head>
   <body>
     <h2>add student</h2>
+    <p style="color:red"><%= err_msg %></p>
     <form action="/students/add" method="post">
       <input type="text" name="first_name" placeholder="First Name">
       <input type="text" name="last_name" placeholder="Last Name">

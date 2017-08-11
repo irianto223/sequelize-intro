@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h2>edit student</h2>
+    <form action="/students/edit/<%= dataStudent.id %>" method="post">
+      <input type="text" name="first_name" placeholder="First Name" value="<%= dataStudent.first_name %>">
+      <input type="text" name="last_name" placeholder="Last Name" value="<%= dataStudent.last_name %>">
+      <input type="text" name="email" placeholder="Email" value="<%= dataStudent.email %>">
+      <button type="submit" name="submit">Submit</button>
+    </form>
+    <br>
+    <a href="/">Back</a>
+  </body>
+</html>
