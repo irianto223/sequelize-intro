@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h2>subject</h2>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Subject Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% dataSubjects.forEach(subject => { %>
+        <tr>
+          <td><%= subject.id %></td>
+          <td><%= subject.subject_name %></td>
+          <!-- <td><a href="#">DELETE</a></td>
+          <td><a href="#">EDIT</a></td> -->
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+    <br>
+    <a href="/">Back</a>
+  </body>
+</html>
