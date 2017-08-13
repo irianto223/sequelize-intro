@@ -9,13 +9,15 @@ module.exports = function(sequelize, DataTypes) {
         isEmail: {msg: 'Format email salah'}
       },
       unique: {msg: 'Email sudah ada'}
-    }
-  }, {
-    classMethods: {
-      associate: function(models) {
-        // associations can be defined here
-      }
-    }
+    },
+    full_name: DataTypes.STRING
   });
+
+  Student.associate = model => {
+    Student.belongsToMany(model.Subject, {
+      through: 'StudentSubjects'
+    })
+  }
+
   return Student;
 };

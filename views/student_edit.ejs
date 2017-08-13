@@ -6,6 +6,7 @@
   </head>
   <body>
     <h2>edit student</h2>
+    <p style="color:red"><%= err_msg %></p>
     <form action="/students/edit/<%= dataStudent.id %>" method="post">
       <input type="text" name="first_name" placeholder="First Name" value="<%= dataStudent.first_name %>">
       <input type="text" name="last_name" placeholder="Last Name" value="<%= dataStudent.last_name %>">
@@ -13,6 +14,6 @@
       <button type="submit" name="submit">Submit</button>
     </form>
     <br>
-    <a href="/">Back</a>
+    <a href="/students">Back</a>
   </body>
 </html>

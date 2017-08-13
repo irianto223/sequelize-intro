@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h2>add teacher</h2>
+    <form action="/teachers/add" method="post">
+      <input type="text" name="first_name" placeholder="First Name">
+      <input type="text" name="last_name" placeholder="Last Name">
+      <input type="text" name="email" placeholder="Email">
+      <select name="subject">
+        <% dataSubjects.forEach(subject => { %>
+        <option value="<%= subject.id %>"><%= subject.subject_name %></option>
+        <% }) %>
+      </select>
+      <button type="submit" name="submit">Add</button>
+    </form>
+    <br>
+    <a href="/teachers">Back</a>
+  </body>
+</html>

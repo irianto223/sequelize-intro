@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h2>add subject to student</h2>
+    <table>
+      <tr>
+        <td><b>first name</b></td>
+        <td>:</td>
+        <td><%=dataStudent.first_name%></td>
+      </tr>
+      <tr>
+        <td><b>last name</b></td>
+        <td>:</td>
+        <td><%=dataStudent.last_name%></td>
+      </tr>
+      <tr>
+        <td><b>email</b></td>
+        <td>:</td>
+        <td><%=dataStudent.email%></td>
+      </tr>
+    </table><br>
+    <form action="/students/<%= dataStudent.id %>/addsubject" method="post">
+      <label for="">Choose Subject</label><br>
+      <select name="subject">
+        <%dataSubjects.forEach(subject => {%>
+          <option value="<%=subject.id%>"><%=subject.subject_name%></option>
+        <%})%>
+      </select><br>
+      <button type="submit" name="submit">Add</button>
+    </form>
+  </body>
+</html>
