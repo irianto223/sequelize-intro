@@ -12,11 +12,11 @@ router.use(session({
 }))
 
 router.get('/', (req, res) => {
-  res.render('index', {session: req.session, err_msg: null})
+  res.render('index', {session: req.session, err_msg: null, pageTitle: 'welcome page'})
 })
 
 router.get('/login', (req, res) => {
-  res.render('login', {err_msg: null})
+  res.render('login', {err_msg: null, pageTitle: 'login page'})
 })
 
 router.post('/login', (req, res) => {

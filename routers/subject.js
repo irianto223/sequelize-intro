@@ -8,7 +8,7 @@ router.use((req,res,next) => {
   }
   else {
     // res.sendStatus(401)
-    res.render('index', {session: req.session, err_msg: 'Anda tidak punya akses ke halaman subjects.'})
+    res.render('index', {session: req.session, err_msg: 'Anda tidak punya akses ke halaman subjects.', pageTitle: 'welcome page'})
   }
 })
 
@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
     order: ['id']
   })
   .then(dataSubjects => {
-    res.render('subject', {dataSubjects: dataSubjects})
+    res.render('subject', {dataSubjects: dataSubjects, pageTitle: 'subject page', session: req.session})
   })
 })
 
@@ -31,7 +31,7 @@ router.get('/:id/enrolledstudents', (req,res) => {
   .then(dataStudentSubjects => {
     dataStudentSubjects.forEach(StudentSubject => {
       // StudentSubject.Letter = toLetter(StudentSubject.score)
-      res.render('subject_enrolled_students', {dataStudentSubjects: dataStudentSubjects})
+      res.render('subject_enrolled_students', {dataStudentSubjects: dataStudentSubjects, pageTitle: 'enrolled students', session: req.session})
     })
   })
 })

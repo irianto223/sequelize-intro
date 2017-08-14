@@ -8,7 +8,7 @@ router.use((req,res,next) => {
   }
   else {
     // res.sendStatus(401)
-    res.render('index', {session: req.session, err_msg: 'Anda tidak punya akses ke halaman students.'})
+    res.render('index', {session: req.session, err_msg: 'Anda tidak punya akses ke halaman students.', pageTitle: 'welcome page'})
   }
 })
 
@@ -17,12 +17,12 @@ router.get('/', (req, res) => {
     order: ['id']
   })
   .then(dataStudents => {
-    res.render('student', {dataStudents: dataStudents})
+    res.render('student', {dataStudents: dataStudents, pageTitle: 'student page', session: req.session})
   })
 })
 
 router.get('/add', (req, res) => {
-  res.render('student_add', {err_msg: null})
+  res.render('student_add', {err_msg: null, pageTitle: 'add student', session: req.session})
 })
 
 router.post('/add', (req, res) => {
@@ -40,7 +40,7 @@ router.post('/add', (req, res) => {
   .catch((err) => {
     // console.log(err);
     // res.send(err)
-    res.render('student_add', {err_msg: err.errors[0].message})
+    res.render('student_add', {err_msg: err.errors[0].message, pageTitle: 'add student', session: req.session})
   })
 })
 
@@ -58,7 +58,7 @@ router.get('/delete/:id', (req, res) => {
 router.get('/edit/:id', (req, res) => {
   model.Student.findById(req.params.id)
   .then(dataStudent => {
-    res.render('student_edit', {dataStudent: dataStudent, err_msg: null})
+    res.render('student_edit', {dataStudent: dataStudent, err_msg: null, pageTitle: 'edit student', session: req.session})
   })
 })
 
@@ -82,7 +82,7 @@ router.post('/edit/:id', (req, res) => {
       res.redirect('/students')
     })
     .catch(err => {
-      res.render('student_edit', {dataStudent: dataStudent, err_msg: err.errors[0].message})
+      res.render('student_edit', {dataStudent: dataStudent, err_msg: err.errors[0].message, pageTitle: 'edit student', session: req.session})
     })
   })
 })
@@ -92,7 +92,7 @@ router.get('/:id/addsubject', (req,res) => {
   .then(dataStudent => {
     model.Subject.findAll()
     .then(dataSubjects => {
-      res.render('student_subject_add', {dataStudent: dataStudent, dataSubjects: dataSubjects})
+      res.render('student_subject_add', {dataStudent: dataStudent, dataSubjects: dataSubjects, pageTitle: 'add student subject', session: req.session})
     })
   })
 })

@@ -8,7 +8,7 @@ router.use((req,res,next) => {
   }
   else {
     // res.sendStatus(401)
-    res.render('index', {session: req.session, err_msg: 'Anda tidak punya akses ke halaman teachers.'})
+    res.render('index', {session: req.session, err_msg: 'Anda tidak punya akses ke halaman teachers.', pageTitle: 'welcome page'})
   }
 })
 
@@ -19,14 +19,14 @@ router.get('/', (req, res) => {
     order: ['id']
   })
   .then(dataTeachers => {
-    res.render('teacher', {dataTeachers: dataTeachers})
+    res.render('teacher', {dataTeachers: dataTeachers, pageTitle: 'teacher page', session: req.session})
   })
 })
 
 router.get('/add', (req,res) => {
   model.Subject.findAll()
   .then((dataSubjects) => {
-    res.render('teacher_add', {dataSubjects: dataSubjects})
+    res.render('teacher_add', {dataSubjects: dataSubjects, pageTitle: 'add teacher', session: req.session})
   })
 })
 
@@ -61,7 +61,7 @@ router.get('/edit/:id', (req, res) => {
     model.Subject.findAll()
     .then((dataSubjects) => {
       // res.render('teacher_add', {dataSubjects: dataSubjects})
-      res.render('teacher_edit', {dataTeacher: dataTeacher, dataSubjects: dataSubjects})
+      res.render('teacher_edit', {dataTeacher: dataTeacher, dataSubjects: dataSubjects, pageTitle: 'edit teacher', session: req.session})
     })
   })
 })
