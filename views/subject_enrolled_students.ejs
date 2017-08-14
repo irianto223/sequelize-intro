@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%-include layout/header%>
+  </head>
+  <body>
+    <div class="container">
+      <%-include layout/page-header%>
+      <table border="1">
+        <tr>
+          <th>name</th>
+          <!-- <th>score by number</th> -->
+          <th>score by letter</th>
+        </tr>
+        <%dataSS.forEach(d => {%>
+        <tr>
+          <td><%=d.Student.first_name%></td>
+          <!-- <%if (d.Score == undefined) {%>
+            <td><a href="/subjects/<%= d.id %>/givescore">Give Score</a></td>
+          <%} else {%>
+            <td><%=d.Score%></td>
+          <%}%> -->
+          <td><%=d.Letter%></td>
+        </tr>
+        <%})%>
+      </table><br>
+      <a href="/subjects">back</a>
+    </div>
+    <%-include layout/footer%>
+  </body>
+</html>

@@ -6,6 +6,19 @@
   </head>
   <body>
     <h1>welcome.</h1>
-    <a href="/teachers">Teacher's Page</a> | <a href="subjects">Subject's Page</a> | <a href="/students">Student's Page</a>
+    <p style="color:red"><%= err_msg %></p>
+    <% if (session.role == 'headmaster') { %>
+      <a href="/teachers">Teacher's Page</a> | <a href="subjects">Subject's Page</a> | <a href="/students">Student's Page</a>
+    <% } else if (session.role == 'academic') { %>
+      <a href="subjects">Subject's Page</a> | <a href="/students">Student's Page</a>
+    <% } else if (session.role == 'teacher') { %>
+      <a href="/students">Student's Page</a>
+    <% } %>
+    <br><br>
+    <% if (session.role) {%>
+      <a href="/logout">LOGOUT</a>
+    <% } else { %>
+      <a href="/login">LOGIN</a>
+    <% } %>
   </body>
 </html>

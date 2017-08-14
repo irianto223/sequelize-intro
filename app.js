@@ -9,7 +9,13 @@ app.use(bodyParser.urlencoded({
   extended: true
 }))
 
-
+const session = require('express-session')
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {}
+}))
 
 // require routers
 var indexRouter = require('./routers/index')

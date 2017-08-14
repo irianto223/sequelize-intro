@@ -2,6 +2,16 @@ const express = require('express')
 const router = express.Router()
 var model = require('../models/')
 
+router.use((req,res,next) => {
+  if (req.session.role == 'academic' || req.session.role == 'headmaster') {
+    next()
+  }
+  else {
+    // res.sendStatus(401)
+    res.render('index', {session: req.session, err_msg: 'Anda tidak punya akses ke halaman subjects.'})
+  }
+})
+
 router.get('/', (req, res) => {
   // res.send('welcome')
   model.Subject.findAll({
@@ -13,8 +23,17 @@ router.get('/', (req, res) => {
   })
 })
 
-router.get('/add', (req,res) => {
-
+router.get('/:id/enrolledstudents', (req,res) => {
+  model.StudentSubject.findAll({
+    include: {all: true},
+    where: {SubjectId: req.params.id}
+  })
+  .then(dataStudentSubjects => {
+    dataStudentSubjects.forEach(StudentSubject => {
+      // StudentSubject.Letter = toLetter(StudentSubject.score)
+      res.render('subject_enrolled_students', {dataStudentSubjects: dataStudentSubjects})
+    })
+  })
 })
 
 module.exports = router

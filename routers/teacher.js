@@ -2,6 +2,16 @@ const express = require('express')
 const router = express.Router()
 var model = require('../models/')
 
+router.use((req,res,next) => {
+  if (req.session.role == 'headmaster') {
+    next()
+  }
+  else {
+    // res.sendStatus(401)
+    res.render('index', {session: req.session, err_msg: 'Anda tidak punya akses ke halaman teachers.'})
+  }
+})
+
 router.get('/', (req, res) => {
   // res.send('welcome')
   model.Teacher.findAll({
