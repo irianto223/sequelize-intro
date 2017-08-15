@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 var model = require('../models/')
+var toLetter = require('../helpers/numToLetter')
 
 router.use((req,res,next) => {
   if (req.session.role == 'academic' || req.session.role == 'headmaster') {
@@ -28,11 +29,32 @@ router.get('/:id/enrolledstudents', (req,res) => {
     include: {all: true},
     where: {SubjectId: req.params.id}
   })
-  .then(dataStudentSubjects => {
-    dataStudentSubjects.forEach(StudentSubject => {
-      // StudentSubject.Letter = toLetter(StudentSubject.score)
-      res.render('subject_enrolled_students', {dataStudentSubjects: dataStudentSubjects, pageTitle: 'enrolled students', session: req.session})
+  .then(data => {
+    data.forEach(d => {
+      d.Letter = toLetter(d.score)
+      // console.log(d.Score);
     })
+    res.render('subject_enrolled_students', {dataSS: data, pageTitle: 'enrolled student', session: req.session})
+  })
+})
+
+router.get('/:id/givescore', (req,res) => {
+  model.StudentSubject.findById(req.params.id)
+  .then(data => {
+    res.render('give_score', {dataSS: data, pageTitle: 'assign score', session: req.session})
+  })
+})
+
+router.post('/:id/givescore', (req,res) => {
+  model.StudentSubject.update({
+    score: req.body.nilai
+  },
+  {
+    include: {all: true},
+    where: {id: req.params.id}
+  })
+  .then(() => {
+    res.redirect(`/subjects/${req.body.idSubject}/enrolledstudents`)
   })
 })
 

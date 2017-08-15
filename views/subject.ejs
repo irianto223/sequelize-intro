@@ -5,8 +5,6 @@
   </head>
   <body>
     <h2>subject</h2>
-    <!-- <a href="/add">Add Subject</a>
-    <br><br> -->
     <%- include layout/navbar %>
     <table border="1">
       <thead>
@@ -24,12 +22,12 @@
           <td><%= subject.subject_name %></td>
           <td>
             <ol>
-              <% subject.Teachers.forEach(teacher => { %>
+              <%subject.Teachers.forEach(teacher => {%>
                 <li><%= teacher.first_name %> <%= teacher.last_name %></li>
               <% }) %>
             </ol>
           </td>
-          <td><a href="/subjects/<%=  %>/enrolledstudents">Enrolled Students</a></td>
+          <td><a href="/subjects/<%=subject.id%>/enrolledstudents">Enrolled Students</a></td>
           <!-- <td><a href="#">DELETE</a></td>
           <td><a href="#">EDIT</a></td> -->
         </tr>
