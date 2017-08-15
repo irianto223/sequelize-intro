@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include layout/header %>
+  </head>
+  <body>
+    <p style="color:red"><%= err_msg %></p>
+    <form action="/register" method="post">
+      <input type="text" name="username" value="" placeholder="Username">
+      <input type="text" name="password" value="" placeholder="Password">
+      <input type="text" name="secret" value="" placeholder="Secret Key">
+      <select name="role">
+        <option value="headmaster">Headmaster</option>
+        <option value="academic">Academic</option>
+        <option value="teacher">Teacher</option>
+      </select>
+      <button type="submit" name="submit">Submit</button>
+    </form>
+    <br>
+    <a href="/">Back</a>
+  </body>
+</html>

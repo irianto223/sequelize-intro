@@ -6,9 +6,15 @@ module.exports = function(sequelize, DataTypes) {
     email: {
       type: DataTypes.STRING,
       validate: {
-        isEmail: {msg: 'Format email salah'}
+        isEmail: {
+          args: true,
+          msg: 'Format email salah'
+        }
       },
-      unique: {msg: 'Email sudah ada'}
+      unique: {
+        args: true,
+        msg: 'Email sudah ada'
+      }
     },
     full_name: DataTypes.STRING
   });
