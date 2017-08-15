@@ -81,8 +81,8 @@ router.post('/register', (req, res) => {
     username: req.body.username,
     password: req.body.password,
     role: req.body.role,
-    // secret: randomSecret(),
-    secret: req.body.secret,
+    secret: randomSecret(),
+    // secret: req.body.secret,
     createdAt: new Date(),
     updatedAt: new Date()
   })
