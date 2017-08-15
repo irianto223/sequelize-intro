@@ -90,8 +90,8 @@ router.post('/register', (req, res) => {
     res.redirect('/')
   })
   .catch(err => {
-    res.render('register', {pageTitle: 'registration', err_msg: err.errors[0].message})
-    // console.log('======================================', err);
+    res.render('register', {pageTitle: 'registration', err_msg: err})
+    // res.render('register', {pageTitle: 'registration', err_msg: err.errors[0].message})
   })
 })
 
