@@ -39,6 +39,34 @@ router.get('/login', (req, res) => {
 //   })
 // })
 
+// router.post('/login', (req,res) => {
+//   model.User.findOne({
+//     where: {
+//       username: req.body.username,
+//     }
+//   })
+//   .then(data => {
+//     model.User.findOne({
+//       where: {
+//         password: encrypt(data.secret, req.body.password)
+//       }
+//     })
+//     .then(dataUser => {
+//       req.session.username = dataUser.username
+//       req.session.password = dataUser.password
+//       req.session.role = dataUser.role
+//       res.redirect('/')
+//     })
+//     .catch(err => {
+//       // res.send('username atau password salah')
+//       res.render('login', {err_msg: 'Password salah.', pageTitle: 'login page'})
+//     })
+//   })
+//   .catch(err2 => {
+//     res.render('login', {err_msg: 'Username tidak ada.', pageTitle: 'login page'})
+//   })
+// })
+
 router.post('/login', (req,res) => {
   model.User.findOne({
     where: {
@@ -46,25 +74,19 @@ router.post('/login', (req,res) => {
     }
   })
   .then(data => {
-    model.User.findOne({
-      where: {
-        password: encrypt(data.secret, req.body.password)
-      }
-    })
-    .then(dataUser => {
-      req.session.username = dataUser.username
-      req.session.password = dataUser.password
-      req.session.role = dataUser.role
+    if (encrypt(data.secret, req.body.password) == data.password) {
+      req.session.username = data.username
+      req.session.role = data.role
       res.redirect('/')
-    })
-    .catch(err => {
-      // res.send('username atau password salah')
+    }
+    else {
       res.render('login', {err_msg: 'Password salah.', pageTitle: 'login page'})
-    })
+    }
   })
-  .catch(err2 => {
+  .catch(err => {
     res.render('login', {err_msg: 'Username tidak ada.', pageTitle: 'login page'})
   })
+
 })
 
 router.get('/logout', (req, res) => {
